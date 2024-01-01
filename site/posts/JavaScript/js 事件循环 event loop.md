@@ -1,0 +1,64 @@
+---
+createTime: 2022-03-11 15:45:49
+tags:
+  - 笔记
+---
+
+
+## 任务优先级
+
+```js
+console.log('我是同步任务')
+
+const t1 = Date.now()
+
+const a = new Promise(function promise(resolve, reject) {
+  setTimeout(() => {
+    resolve(1)
+  })
+})
+
+setTimeout(function timeout() {
+  console.log('我是宏任务1')
+}, 0)
+a.then(function () {
+  console.log('我是微任务1')
+})
+setTimeout(function timeout() {
+  console.log('我是宏任务2')
+}, 0)
+
+a.then(function () {
+  console.log('我是微任务2')
+}).then(function () {
+  for (let i = 0; i < 1000000000; i++) {}
+  console.log('我是微任务3,我阻塞了宏任务', Date.now() - t1)
+})
+
+// 结果
+
+// 我是同步任务
+// 我是微任务1
+// 我是微任务2
+// 我是微任务3, 我阻塞了宏任务 715
+// 我是宏任务1
+// 我是宏任务2
+```
+
+由此可以看出调度的优先级: 同步任务 > 微任务 > 宏任务
+
+# 微任务
+
+**微任务，microtask，也叫 jobs**
+
+会在执行栈为空时,一次行全部执行
+
+## 宏任务
+
+**宏任务，macrotask，也叫 tasks。**
+
+每一次事件循环只执行一个
+
+## event loop 图解
+
+<iframe width="100%" height="500px" src="https://viewer.diagrams.net/?tags=%7B%7D&highlight=FFFFFF&layers=1&nav=1&title=js%20event%20loop#R7Vxbk5s4Fv41VCUP3cVViEdw25ndTWoz01O7M48YyzYTDA7gdPf%2B%2BpWExE0CYxtsJ5NOqlsIIYlz03eODlKM2e71Q%2Brvt5%2BSFYoUXV29KsaTousadAD%2BQ2reihrHNoqKTRquWKOq4jn8H2KVKqs9hCuUNRrmSRLl4b5ZGSRxjIK8UeenafLSbLZOouaoe3%2BDhIrnwI%2FE2v%2BGq3xb1ELdrup%2FQeFmy0fWgFPc2fm8MXuTbOuvkpdalTFXjFmaJHlR2r3OUESIx%2BlSPLfouFtOLEVxPuSBrx%2FA8mOS%2F%2F6W%2F2s1X%2Fqv%2FwF79YGT%2BZsfHdgbs9nmb5wEaIUpwi6TNN8mmyT2o3lV66XJIV4hMo6Kr6o2H5Nkjys1XPkXyvM3xl7%2FkCe4apvvInZ3ncQ5u6mZ%2BFp8N%2Fa6WXJIA9TzQpDJiJ9uUN7TjnGJvFttAEa5DyjZoTx9ww1SFPl5%2BK0pDT4Tqk3ZrqI7LjDSn8AGKHAhRV8PKMvdOMSCFCaxwJUmzV%2B2YY6e9z6lzQtWxX76rsMomiVRktK%2BjMXiyQGgj%2B7fUJqj115KlSqvMpliGg8Bu36p9EczWd22pju83ejU1YwfTMidgUKu6Xcl5Y6EDSDCL%2BDtG8wAXw%2FEKHpY4vIHPwo3sWK4uEWE1nl1F5c29O8cKK6qeLYytxRvpsAFbvru%2BT3vG091X7adUotsw3KCNa7P8jT5ghr6RX7G0i%2BtqV%2B2KdEv%2Far6pXUydhklwRfCMFSxoGR5s6LJp6LuEEkFY%2B%2BvVmG8KaRC3b%2B2fuuQ%2FqH94HU43YRxvWlRHxTsIdXpZvnO0sgdHRNAbRTflw8s%2FeDLhsrLQ%2BtZ3bLKJ1rl9xJ5Ze8WhdJ3i8Isf2DVZIAw3qI0zFvv87BM8jzZ1V6raxgitNKByI2HjIoz6UTT%2B3rJ9n7c3csLkzLSj03M%2FwAdnS9oAT7zksMKjluTiGLcci7%2BjqhkvMz2tFOoeKbiLFjBNWTDQMWdK66mzG1ScGw%2B3Iw0dkzFA8rcURxPgYDU4GlAld4qpmST%2BUATv9jsGU%2FVIHehJuuWPuK5dGiX9EyexbOCpAbiGaq0gP8b5BaZMK7BE4AKdKuBJNaspEbBS0FtiCQJlUR1firTj6lMFhUagxY0Kq9MmT5eoExUSJ2id48KciGbXEhdl8gmLng6FfaF4nCFc7SGVuHRvXlN6h2iKJ5F9exJcXW51Lc1zyIaidUFF7CGeQ59ylNcWoPVAroyfSo7xI2fFPhEbz2RHs5Qo7%2BXVNmEvE5prkApVZ9HlSrKTmdOpcGhDC55RnlJjHbJTiwNFpUhQHiJH6zkTJyuKDEDRHAs6zoIz%2BA6GSJqgVKCe5vIsxtR1jFonMTEUWGI%2BYnCZcMj0DIM%2FMhl1btwtaIOjQztNvHwYI%2FlBPhqgiZ8tSTw1ZC5h7o9GX61fzD%2FkPt9xx1EcFcOIp93nRHCYvfu4%2FvruHFTOGvAuKKzFqMFPKRff%2F0a%2FDW34acF8qx%2FPmB7emPZhvgakzR9%2B4P092jxyz9Z9%2FTi6bVx9cavXsO89hi%2B%2BrN2p3qIXPBnpCJ%2BVLGkxNNUSXyxo%2BWFisQe%2FZyEFBwwgYIqfDRqP2ZDuh4MrSU2xTxZJ%2FXgcKtfDdpNQTWcVk8FbYSe3DT132rN9qRB1v0CwkA80t81M6D1tseFYgqVRpTUPl9JNG6Jrqsl50h3lyZpRzSprZHnaUnvqjJASeBNlxsgWW4EWKmr7z5Pu%2BKA%2BWKBAfE0K441dMUxp1px%2BGB98IrEAvYd71pu7vlL3lztoFQnWSy9SRVTFjSFEqoY%2BlRkGbL1draUVRotIWedbD0cE4l5Q2KJewfPuR98ESh2zHdiPlKP2xRg2qB0PMdpGlZwudYeTR1atsZ%2FN9dKUcht%2B1FrPCHh4lRMNMVtzlusst1YtIFEq%2BX0JCzK1%2FHpsShPhzi2ypr2hYvsMGAGVWsQYhwPownStD7EQbFZrmqCZF1kS1sr9nq91oNAFphZgSWwwFCVP7JomU0K26pk0ZpqJ11Oc9FBr9F85PWrRfOVheDKlNEc6ksDTERzIAMKV6U5EEX5Gq7ImUbxfLfiqB3TwSR2zG7lq1jWNJ5v1zhdjq9tXNbeVK%2FgKIPb%2BMlnRo8mFE7D%2BimcJ7TXYX97zdB7H5go7CMmitWWN2NaSAEDJIcUS2iZljrN8mbBWy9vuhiE%2BRQGaZL7Gfbu1F8PCFe3CZ%2B9hLvILzy5I6jBR3BdkNVPeUNTldEZBBAt1%2BPQ2YZNOpeB2WO7XKVf3WMjfiOxkHiDiVGLC7egomQ8zZGM13b2%2FAg7v7GfI4%2FIdiawdwQt08Xttn2a7MIMPeZbNGKm64RadhJAYd20Q1A31zzRHcd8CFCWPcboNf89lIRX7hHQn8MLDd4ZM%2FhgkhzKVfhNkeV1DE2PtWlCjkNzKFTFtYvWNANixiPdNNhNYt8uacCSZ%2Ba04NKCpWDrUaT3uE80CYdm43hFiodL0iv0Gd2jfSJ5QTz9k8%2BCBeuqLIh6ZiDZ36VpIK5DM0RqSUGOzTM7VJItQoYwWQZKlZ6EpzSjuXj8BYtsIlKApL7MSpJm9pE5z2lqifBGJFsE0gTDIo3Frr0B5cqZCRzfXRDyJMOmydY6VaJMYyR09IDxJqbwx8MUtUXkGKYYE7tpmvUTVHSyXISRGcJr2A4lh1zgdZVzSkJ5guZcuK5VkPMihHmSn3mnGMMQsR5myz%2BIccNVk8ILpGGAYcvY4ADb8C%2BDF0fYcHfwwuj%2B9uZCeNHIPh0ZcnSty3qBQxY0V7Rc%2FYsHPd4e8B4oosAduguWOVxkMrcRgpjtTNNIyRDiBLqyX%2F%2BO6OA0k3R7dABNgSVXzO3h5Vo4fUBuz7WC8Ed3HU1m0I8GRC1dLhWjp%2Fb0TrOR2iPqfKHh3JqQ1MhZ4amIXsmkUQmL%2FGPtavXFjxRJ0J%2BRYlUtWAktaxjMm05Db5Kj%2BoNoaKF4AzS0OKngVhoKwS15fG6GJaizWXtUtaNJIuTqM0qxI0KX7Lvhvn1T%2B8yn2bLPGBoWKA2bGxc0PgbrxIJtu7xNdstDNp4X15S5SXcNNLV9doIlgiVdBpb6HPzL1BR%2BL2o6oVLxM12OKhW8NNXqsk87JEp1A%2BbdAyOca33H1DvN4dat09GcyLqVIcwj1m3U%2BKUO7s66iXv617RuJwDNCZXqYiQwLKUEtN2Fjm%2BTxooI2zKIQT8mhqB304fGpsixDQ757JAUAA0f8bCVa5U%2BYsufbMvS94dAYCtaI0t%2F1K1rRi6hzJOnYTwHnBa0I%2Fa22LqcmHG3Ma5tdbs553jI4B6gY39Wfs%2FXqSYsEw5JPw%2Fqo6qf5fONaLCNq8HR7uS8xmcnoCl57e2%2FDkN%2F8qej7ZxAC5yYRNh6YJokQuemmOI7D145knzb7hMTb%2BZoSQ48I2dQLdhJJxQkyE7LofkkHoX%2B5IQSMcw5UhxZ3Oq5elRZs1p7oNJzIK969IGmSvgm6Gq8csm5sfgqiPwsC4MmC4bsoh1XBZFsNarIVmleN4LpbprENirvSCg%2FnjF%2BZXivqTfdxjsFXtQDyLrRhhPHPtS%2FdgSZ48Y7jyCXR3Hc%2FNDcTeqvQlSZ2Nr%2B%2Fb9x52FOOElxftK8HMPKtj%2F3N2U5WjIr2%2F6QZDzGSI%2FbHeWks8ojp8kjxYmNnsXPebRpRolFEkVd%2BJu7kOeBspTS2nGNuED6LBZwp%2FNEsJYs3WcaxwQi5rQ%2FLJN8Vj4kC3CAhOHL6kD0YqWojpU35v8H" frameborder="0"></iframe>
