@@ -1,5 +1,6 @@
 {
-	"rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-	"buildCommand": "pnpm build",
-	"outputDirectory": "dist"
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm i",
+  "outputDirectory": ".upress/dist"
 }
