@@ -8,7 +8,7 @@
     "serve": "upress serve ./"
   },
   "dependencies": {
-    "upress": "latest",
-    "@upress/theme-default": "latest"
+    "@upress/theme-default": "latest",
+    "upress": "0.0.1-beta.11"
   }
 }

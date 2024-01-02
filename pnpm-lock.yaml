@@ -7,10 +7,10 @@ settings:
 dependencies:
   '@upress/theme-default':
     specifier: latest
-    version: 0.0.2(upress@0.0.1-beta.9)
+    version: 0.0.5(upress@0.0.1-beta.11)
   upress:
-    specifier: latest
-    version: 0.0.1-beta.9(search-insights@2.13.0)
+    specifier: 0.0.1-beta.11
+    version: 0.0.1-beta.11(search-insights@2.13.0)
 
 packages:
 
@@ -465,33 +465,33 @@ packages:
     resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
     dev: false
 
-  /@upress/theme-default@0.0.2(upress@0.0.1-beta.9):
-    resolution: {integrity: sha512-pN6YnyLFrXJbXDeJusSzHLhwWUoLkUBth1fuQLgSlous8TBvuOxjImpa5PJJFcFgbShnZF3KsqN8YI/kX9diHg==}
+  /@upress/theme-default@0.0.5(upress@0.0.1-beta.11):
+    resolution: {integrity: sha512-V/+gGj8zPFm2I13/u3zQwK3sQHCnkaZy6d3gSExSnPiwQCGekFuJgCBjjTvlPhC+d3zpkPNuKbpr7viTcsckKA==}
     peerDependencies:
       upress: '*'
     dependencies:
-      '@upress/theme-vitepress': 0.0.2(upress@0.0.1-beta.9)
+      '@upress/theme-vitepress': 0.0.4(upress@0.0.1-beta.11)
       bootstrap-icons-vue: 1.11.1
       sass: 1.69.6
-      upress: 0.0.1-beta.9(search-insights@2.13.0)
+      upress: 0.0.1-beta.11(search-insights@2.13.0)
       vue: 3.4.3
     transitivePeerDependencies:
       - typescript
     dev: false
 
-  /@upress/theme-vitepress@0.0.2(upress@0.0.1-beta.9):
-    resolution: {integrity: sha512-B8z2zkSAnvqgK+umLRXmcJjTtjAYD1BXRRnzDgDq/Lyhe58jED6zsZLCzRIKRZ0m8L6u9ab/7ecloHqdOgh7Bg==}
+  /@upress/theme-vitepress@0.0.4(upress@0.0.1-beta.11):
+    resolution: {integrity: sha512-rKnnLZ4NN3KXvayN6mH/l61TPD2lzkiP4WhejFIl5Vm/zs7EuMEO4usBn9NtfrCxpuyn0vLwd/iPnvUx+YUkVA==}
     peerDependencies:
       upress: '*'
     dependencies:
-      upress: 0.0.1-beta.9(search-insights@2.13.0)
+      upress: 0.0.1-beta.11(search-insights@2.13.0)
       vue: 3.4.3
     transitivePeerDependencies:
       - typescript
     dev: false
 
-  /@upress/types@0.0.1-beta.1:
-    resolution: {integrity: sha512-TYyOWiZqgjjd0y2aFwzEPDGlmpzI/MPNrDmunI1ghUg9Nc1Khr94WH0oi7ZmhfuheE1HCohW0f0YY9jxWtCV8w==}
+  /@upress/types@0.0.1-beta.2:
+    resolution: {integrity: sha512-TDoQRO7Q1V2hFuEm9n95k2QyN85AggRXU8tbqbzrjQb7WrZJWasF5TzYR1Nqt6prGz0i1W6EkwTgGH3r88cxOw==}
     dev: false
 
   /@vitejs/plugin-vue@4.6.2(vite@4.5.1)(vue@3.4.3):
@@ -1446,14 +1446,14 @@ packages:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: false
 
-  /upress@0.0.1-beta.9(search-insights@2.13.0):
-    resolution: {integrity: sha512-tl5lM97JNxdp7DZqYl6dU3Ta7WXlHAApIbb3AxGE45gziUkPg+U1tSQ1WfyqRHtHdQ8LO2oG8sGCVmYAqaNcvg==}
+  /upress@0.0.1-beta.11(search-insights@2.13.0):
+    resolution: {integrity: sha512-hsprML0moCcn8kNXwTAXXBXrhJQWchoRq/lixpPPVMo5TFwq/IBrdWjwNNJuACCN/rckZS8NskXI6uGeLwTHzw==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.5.2
       '@docsearch/js': 3.5.2(search-insights@2.13.0)
       '@types/plantuml-encoder': 1.4.2
-      '@upress/types': 0.0.1-beta.1
+      '@upress/types': 0.0.1-beta.2
       '@vitejs/plugin-vue': 4.6.2(vite@4.5.1)(vue@3.4.3)
       '@vue/devtools-api': 6.5.1
       '@vueuse/core': 9.13.0(vue@3.4.3)
