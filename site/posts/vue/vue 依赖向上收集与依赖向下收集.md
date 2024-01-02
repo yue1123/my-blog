@@ -31,7 +31,7 @@ createTime: 2023-02-27 22:06:07
 
 我们尝试点击按钮更新数据，发现视图依旧更新了，在控制台输出 `vm` 看看`renderWatcher`收集了哪些依赖
 
-![image1677503997528.png](https://u1talk.com/api/static/upload/images/image1677503997528.png)
+![image1677503997528.png](/image1677503997528.png)
 
 可以看到，他把整个每一个 key 都收集到了依赖中，这是为什么？先说答案，当我们在模版中输出对象时，渲染函数最终会通过`JSON.stringtify` 把对象转换为字符串，这个过程中就会深层触发数据`get`，从而被 `renderWatcher`收集为依赖，这是**向下收集**。**向上收集**就简单了，就是访问`c`的过程中，就得先取到 a 和 b 的值，依赖就被收集了
 
@@ -39,7 +39,7 @@ createTime: 2023-02-27 22:06:07
 
 当我们在 watch 中监听 `a.b.c`的变化时，需要指定`deep` 才能监听到 e 的变化，`deep`在内部又是怎么实现依赖收集的呢？
 
-![image1677506969943.png](https://u1talk.com/api/static/upload/images/image1677506969943.png)
+![image1677506969943.png](/image1677506969943.png)
 
 ```html
 <div id="app">
